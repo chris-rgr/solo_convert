@@ -5,7 +5,7 @@ from shapely.geometry import Polygon
 from ..color import RGBColor, RGBAColor
 
 
-def detect_polygons(mask: cv2.typing.MatLike, float_precision=6):
+def detect_polygons(mask, float_precision=6):
     """
     Detect polygons from a mask.
     :param mask: opencv image
@@ -41,7 +41,7 @@ def detect_polygons(mask: cv2.typing.MatLike, float_precision=6):
     return polygons, normalized_polygons
 
 
-def detect_colored_polygons(mask: cv2.typing.MatLike, color: RGBColor | RGBAColor, bg_color=RGBColor(0, 0, 0),
+def detect_colored_polygons(mask, color: RGBColor | RGBAColor, bg_color=RGBColor(0, 0, 0),
                             precision=6):
     """
     Detect polygons from a mask that are a certain color

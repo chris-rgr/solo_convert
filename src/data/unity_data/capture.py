@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import os
 from typing import List
 
 from .bounding_box_2d import BoundingBox2DAnnotation
@@ -45,6 +46,7 @@ class Capture:
         :return: A Capture object
         """
         path = _dict['path']
+        sequence = int(path.split('.')[-1])
         annotations = {}
 
         for annotation in _dict['annotations']:
@@ -70,13 +72,14 @@ class Capture:
             TransformAnnotation.from_dict(annotations[TransformAnnotation.type_name])
 
         return Capture(_dict['id'],
-                       int(path.split('/')[-1].split('.')[-1]),
+                       #int(path.split('/')[-1].split('.')[-1]),
+                        sequence,
                        _dict['description'],
                        _dict['position'],
                        _dict['rotation'],
                        _dict['velocity'],
                        _dict['acceleration'],
-                       path + '/' + _dict['filename'],
+                       os.path.join(path, _dict['filename']),
                        _dict['imageFormat'],
                        _dict['dimension'],
                        _dict['projection'],

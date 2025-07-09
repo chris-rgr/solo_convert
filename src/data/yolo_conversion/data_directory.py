@@ -9,10 +9,13 @@ def create_yolo_data_dir(path: str, include_test: bool = False) -> tuple[str, st
     :param include_test: Are test images included?
     :return: Tuple: The path to the created directory and the path to the yaml file
     """
-    if path[-1] == "/":
-        path = path[:-1]
+    
+    #if path[-1] == "/":
+    #    path = path[:-1]
+    path = os.path.normpath(path)
 
-    name = path.split("/")[-1]
+    #name = path.split("/")[-1]
+    name = os.path.basename(path)
 
     if os.path.exists(path) and not os.path.isdir(path):
         raise Exception("Path is not a directory")
@@ -29,11 +32,11 @@ def create_yolo_data_dir(path: str, include_test: bool = False) -> tuple[str, st
     path.mkdir(parents=True)
 
     # Create data directories
-    os.mkdir(f"{path}/train")
-    os.mkdir(f"{path}/val")
+    os.mkdir(os.path.join(path, "train"))
+    os.mkdir(os.path.join(path, "val"))
     if include_test:
-        os.mkdir(f"{path}/test")
+        os.mkdir(os.path.join(path, "test"))
 
-    yaml_path = f"{path}/{name}.yaml"
+    yaml_path = os.path.join(path, name) + ".yaml"
 
     return path.as_posix(), yaml_path

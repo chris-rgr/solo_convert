@@ -45,7 +45,7 @@ def validate_vector_data(data: UnityData, v_data_path: str, kp_v_size: int, seg_
     for row in vec_data:
         seq, instance, pos, direction, kp_left, seg_left, kp_right, seg_right = split_row(row, kp_v_size, seg_v_size)
 
-        seq = data.get_sequence(seq)
+        seq = data.get_captures_by_sequence(seq)
 
         for c in seq:
             is_left = c.id == "LeftCam"

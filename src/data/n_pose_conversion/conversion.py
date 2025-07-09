@@ -62,7 +62,7 @@ def unity_to_n_pose(data: UnityData, file_path: str, converter_class: Type[Vecto
             right_capture = None
 
             # Find the left and right captures for the current sequence
-            for capture in data.get_sequence(seq):
+            for capture in data.get_captures_by_sequence(seq):
                 if capture.sequence == seq and capture.id == "RightCam":
                     right_capture = capture
                 elif capture.sequence == seq and capture.id == "LeftCam":
